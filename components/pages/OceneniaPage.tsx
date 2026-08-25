@@ -18,6 +18,12 @@ type Award = {
 
 const awards: Award[] = [
   {
+    year: "2026",
+    competitionKey: "award.a22.competition",
+    locationKey: "award.a22.location",
+    badgeKeys: ["award.a22.b1", "award.a22.b2"],
+  },
+  {
     year: "2025",
     competitionKey: "award.a1.competition",
     locationKey: "award.a1.location",
