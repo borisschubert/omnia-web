@@ -7,7 +7,7 @@ import LoadTitleEnter from "@/components/ui/LoadTitleEnter";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import { StaggerContainer, StaggerItem } from "@/components/ui/Stagger";
 import type { ConcertEventType, HomeConcertItem } from "@/lib/content/homeConcerts";
-import { homeConcerts } from "@/lib/content/homeConcerts";
+import { getUpcomingConcerts } from "@/lib/content/homeConcerts";
 
 const heroTitleShadow = "[text-shadow:0_2px_12px_rgba(0,0,0,0.85),0_1px_2px_rgba(0,0,0,0.6)]";
 
@@ -146,7 +146,7 @@ function cardBorderClass(type: ConcertEventType): string {
 }
 
 export default function ProgramPage({ locale }: { locale: Locale }) {
-  const groups = groupConcertsByMonth(homeConcerts, locale);
+  const groups = groupConcertsByMonth(getUpcomingConcerts(), locale);
 
   return (
     <main className="min-h-screen bg-[#050505]">

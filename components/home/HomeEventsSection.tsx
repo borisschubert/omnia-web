@@ -8,7 +8,7 @@ import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import { StaggerContainer, StaggerItem } from "@/components/ui/Stagger";
-import { homeConcerts } from "@/lib/content/homeConcerts";
+import { homeConcerts, getUpcomingConcerts } from "@/lib/content/homeConcerts";
 
 const PREVIEW = 3;
 
@@ -22,7 +22,7 @@ function formatPreviewLocation(locale: Locale, item: (typeof homeConcerts)[numbe
 }
 
 export default function HomeEventsSection({ locale }: { locale: Locale }) {
-  const items = [...homeConcerts]
+  const items = [...getUpcomingConcerts()]
     .sort((a, b) => a.dateIso.localeCompare(b.dateIso))
     .slice(0, PREVIEW);
 

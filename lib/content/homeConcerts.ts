@@ -28,52 +28,8 @@ export type HomeConcertItem = {
   descriptionKey?: string;
 };
 
-/** 2026 season — chronological from May onward */
+/** 2026 season — chronological from September onward */
 export const homeConcerts: HomeConcertItem[] = [
-  {
-    dateKey: "concert.s2026.may.staromestske.date",
-    dateIso: "2026-05-30",
-    eventType: "public",
-    titleKey: "concert.s2026.may.staromestske.title",
-    placeKey: "concert.s2026.may.staromestske.place",
-    venueKey: "concert.s2026.may.staromestske.venue",
-    timeKey: "concert.s2026.may.staromestske.time",
-    mapsUrl: "https://www.google.com/maps/search/Mari%C3%A1nske+n%C3%A1mestie+%C5%BDilina",
-    externalUrl: "https://www.kulturazilina.sk/staromestske-slavnosti/",
-  },
-  {
-    dateKey: "concert.s2026.jun.workshops.date",
-    dateIso: "2026-06-06",
-    dateDisplayKey: "concert.s2026.jun.workshops.dateDisplay",
-    eventType: "private",
-    titleKey: "concert.s2026.jun.workshops.title",
-  },
-  {
-    dateKey: "concert.s2026.jun.promocie.date",
-    dateIso: "2026-06-26",
-    eventType: "private",
-    titleKey: "concert.s2026.jun.promocie.title",
-  },
-  {
-    dateKey: "concert.s2026.jul.terchova.date",
-    dateIso: "2026-07-05",
-    eventType: "public",
-    titleKey: "concert.s2026.jul.terchova.title",
-    placeKey: "concert.s2026.jul.terchova.place",
-    externalUrl: "https://www.terchova.sk/podujatia/cyrilometodske-dni",
-    primaryCtaKey: "program.moreAboutEvent",
-    mapsUrl: "https://www.google.com/maps/search/Terchov%C3%A1+Slovakia",
-  },
-  {
-    dateKey: "concert.s2026.aug.wcg.date",
-    dateIso: "2026-08-12",
-    dateDisplayKey: "concert.s2026.aug.wcg.dateDisplay",
-    eventType: "majorInternational",
-    titleKey: "concert.s2026.aug.wcg.title",
-    placeKey: "concert.s2026.aug.wcg.place",
-    mapsUrl: "https://www.google.com/maps/search/Sweden",
-    externalUrl: "https://www.interkultur.com/events/world-choir-games/helsingborg-2026",
-  },
   {
     dateKey: "concert.s2026.sep.festival.date",
     dateIso: "2026-09-06",
@@ -99,3 +55,21 @@ export const homeConcerts: HomeConcertItem[] = [
     placeKey: "concert.s2026.dec.gaudium.place",
   },
 ];
+
+/**
+ * Returns only concerts that are today or in the future, so events
+ * automatically disappear from the site once their date has passed —
+ * no manual cleanup needed.
+ *
+ * Note: for multi-day events (e.g. a festival spanning several days),
+ * `dateIso` is the *start* date, so the event drops off the list on the
+ * day after it starts, not after it ends.
+ */
+export function getUpcomingConcerts(referenceDate: Date = new Date()): HomeConcertItem[] {
+  const y = referenceDate.getFullYear();
+  const m = String(referenceDate.getMonth() + 1).padStart(2, "0");
+  const d = String(referenceDate.getDate()).padStart(2, "0");
+  const todayIso = `${y}-${m}-${d}`;
+
+  return homeConcerts.filter((item) => item.dateIso >= todayIso);
+}
