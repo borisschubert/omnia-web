@@ -10,7 +10,7 @@ const workSans = Work_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Zmiešaný spevácky zbor Omnia",
+  title: "Miešaný spevácky zbor Omnia",
   description: "Mixed choir Omnia",
 };
 
