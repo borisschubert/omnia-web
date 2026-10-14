@@ -68,7 +68,7 @@ export default function Header({ locale }: { locale: Locale }) {
           </Link>
 
           <nav
-            className="hidden flex-wrap items-center justify-end gap-4 sm:gap-6 md:flex md:gap-8"
+            className="hidden flex-nowrap items-center justify-end gap-5 whitespace-nowrap lg:flex xl:gap-6"
             aria-label="Main"
           >
             {links.map(({ href, key }) => {
@@ -81,23 +81,23 @@ export default function Header({ locale }: { locale: Locale }) {
             })}
             <Link
               href={donateHref}
-              className={`ml-4 rounded-full px-4 py-2 font-medium text-black shadow-md transition hover:opacity-90 hover:shadow-lg ${
+              className={`shrink-0 rounded-full px-4 py-2 font-medium text-black shadow-md transition hover:opacity-90 hover:shadow-lg ${
                 pathname === donateHref ? "bg-accent/80" : "bg-accent"
               }`}
             >
               {t(locale, "button.donate")}
             </Link>
-            <div className="ml-4 hidden items-center md:flex">
+            <div className="hidden items-center xl:flex">
               <SocialLinks />
             </div>
-            <span className="ml-2 border-l border-border pl-6" aria-hidden>
+            <span className="border-l border-border pl-5" aria-hidden>
               <LanguageSwitcher currentLocale={locale} />
             </span>
           </nav>
 
           <button
             type="button"
-            className="inline-flex shrink-0 items-center justify-center rounded-md p-2 text-accent transition-opacity hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background md:hidden"
+            className="inline-flex shrink-0 items-center justify-center rounded-md p-2 text-accent transition-opacity hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background lg:hidden"
             onClick={() => setIsOpen((open) => !open)}
             aria-expanded={isOpen}
             aria-controls="mobile-main-nav"
@@ -110,7 +110,7 @@ export default function Header({ locale }: { locale: Locale }) {
         {isOpen ? (
           <nav
             id="mobile-main-nav"
-            className="border-t border-border pb-5 pt-4 md:hidden"
+            className="border-t border-border pb-5 pt-4 lg:hidden"
             aria-label={locale === "sk" ? "Hlavná navigácia" : "Main navigation"}
           >
             <ul className="flex flex-col gap-1">

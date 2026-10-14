@@ -80,8 +80,6 @@ export const newsArticles: NewsArticleMeta[] = [
       "news.article.donio.body.p2",
       "news.article.donio.body.p3",
     ],
-    campaignPriority: true,
-    priorityBadgeKey: "news.badge.currentChallenge",
     donioUrl:
       "https://donio.sk/omnia?utm_id=97757_v0_s00_e231_tv2_tp1_a1demongi5su6r&fbclid=IwY2xjawSEIVhleHRuA2FlbQIxMQBzcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEe5h1pD9KEG2HHYVULq6brj5DPze48HsaRsdSh5i_S78h82idNCaS_WgdGSZc_aem_BCX6kV4c1Mg45i7-ziR_6w",
     donioCtaKey: "news.article.donio.cta",

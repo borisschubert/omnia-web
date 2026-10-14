@@ -421,6 +421,12 @@ function groupAwardsByYear(items: Award[]): { year: string; items: Award[] }[] {
 export default function OceneniaPage({ locale }: { locale: Locale }) {
   const byYear = groupAwardsByYear(awards);
   const reducedMotion = usePrefersReducedMotion();
+  /** Featured box = newest award (first item in `awards`) */
+  const featured = awards[0];
+  const featuredCompetition = t(locale, featured.competitionKey);
+  const featuredTitle = featuredCompetition.includes(featured.year)
+    ? featuredCompetition
+    : `${featuredCompetition} ${featured.year}`;
 
   return (
     <main className="min-h-screen bg-[var(--background)]">
@@ -430,9 +436,9 @@ export default function OceneniaPage({ locale }: { locale: Locale }) {
 
           <div className="mx-auto mt-12 max-w-2xl rounded-xl border border-white/10 bg-black/25 px-4 py-4 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-[2px] md:mt-14 md:px-6 md:py-5">
             <p className="text-[0.8125rem] leading-snug text-white/85 md:text-sm">
-              <span className="font-semibold text-white">{t(locale, "page.awards.featured.title")}</span>
-              <span className="text-white/75"> · {t(locale, "page.awards.featured.location")}</span>
-              <span className="text-accent"> — {t(locale, "page.awards.featured.result")}</span>
+              <span className="font-semibold text-white">{featuredTitle}</span>
+              <span className="text-white/75"> · {t(locale, featured.locationKey)}</span>
+              <span className="text-accent"> — {featured.badgeKeys.map((key) => t(locale, key)).join(" · ")}</span>
             </p>
             <p className="mt-1.5 text-xs text-white/70 md:text-[0.8125rem]">{t(locale, "page.awards.featured.description")}</p>
             <div className="mt-4 flex w-full justify-center">
