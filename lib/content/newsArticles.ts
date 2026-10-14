@@ -5,6 +5,7 @@ export const newsCardImageClass =
   "object-contain object-center bg-[#050505] opacity-80 contrast-95 brightness-90 grayscale-[20%] transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0 group-hover:brightness-100";
 
 export const newsArticleSlugs = [
+  "world-choir-games-2026-dve-zlate-medaily",
   "staromestske-slavnosti-zilina",
   "podporte-nas-olympijsky-sen-donio",
   "cyrilometodske-dni-terchova",
@@ -22,6 +23,8 @@ export type NewsArticleMeta = {
   dateKey: string;
   /** Body paragraph i18n keys, in order */
   bodyKeys: string[];
+  /** Extra photos shown below the article body (full image, not cropped) */
+  gallery?: string[];
   featured?: boolean;
   /** Pin near top of lists; first in grid below featured hero */
   campaignPriority?: boolean;
@@ -33,6 +36,23 @@ export type NewsArticleMeta = {
 };
 
 export const newsArticles: NewsArticleMeta[] = [
+  {
+    slug: "world-choir-games-2026-dve-zlate-medaily",
+    dateIso: "2026-10-14",
+    image: "/images/wcg-2026-zbor-arena.jpg",
+    categoryKey: "news.category.competition",
+    titleKey: "news.article.wcg2026.title",
+    excerptKey: "news.article.wcg2026.excerpt",
+    dateKey: "news.article.wcg2026.date",
+    bodyKeys: [
+      "news.article.wcg2026.body.p1",
+      "news.article.wcg2026.body.p2",
+      "news.article.wcg2026.body.p3",
+      "news.article.wcg2026.body.p4",
+    ],
+    gallery: ["/images/wcg-2026-medaily.jpg", "/images/wcg-2026-zbor-schody.jpg"],
+    featured: true,
+  },
   {
     slug: "staromestske-slavnosti-zilina",
     dateIso: "2026-05-12",
@@ -46,7 +66,6 @@ export const newsArticles: NewsArticleMeta[] = [
       "news.article.staromestske.body.p2",
       "news.article.staromestske.body.p3",
     ],
-    featured: true,
   },
   {
     slug: "podporte-nas-olympijsky-sen-donio",

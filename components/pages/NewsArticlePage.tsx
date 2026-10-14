@@ -70,6 +70,26 @@ export default function NewsArticlePage({
             ))}
           </div>
 
+          {article.gallery?.length ? (
+            <div className="mx-auto mt-10 max-w-3xl space-y-6">
+              {article.gallery.map((src) => (
+                <div
+                  key={src}
+                  className="overflow-hidden rounded-2xl border border-[var(--primary-gold)]/30 bg-black shadow-[0_16px_40px_-20px_rgba(0,0,0,0.75)]"
+                >
+                  <Image
+                    src={src}
+                    alt=""
+                    width={2000}
+                    height={1313}
+                    className="h-auto w-full"
+                    sizes="(max-width: 768px) 100vw, 672px"
+                  />
+                </div>
+              ))}
+            </div>
+          ) : null}
+
           {article.donioUrl && article.donioCtaKey ? (
             <div className="mt-8 w-full">
               <a
