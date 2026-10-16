@@ -7,15 +7,15 @@ import type { Locale } from "@/lib/i18n/config";
 import { t } from "@/lib/i18n/strings";
 import Container from "@/components/ui/Container";
 import LoadTitleEnter from "@/components/ui/LoadTitleEnter";
+import { BANK_ACCOUNT_NUMBER, BANK_BIC, BANK_IBAN, BANK_NAME, ORG_NAME } from "@/lib/content/organization";
 
 const DONIO_CAMPAIGN_URL =
   "https://donio.sk/omnia?utm_id=97757_v0_s00_e231_tv2_tp1_a1demongi5su6r&fbclid=IwY2xjawSEIVhleHRuA2FlbQIxMQBzcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEe5h1pD9KEG2HHYVULq6brj5DPze48HsaRsdSh5i_S78h82idNCaS_WgdGSZc_aem_BCX6kV4c1Mg45i7-ziR_6w";
 
-const BANK_NAME = "Fio banka, a.s.";
-const ACCOUNT_NUMBER = "2101244230/8330";
-const BIC = "FIOZSKBA";
-const IBAN = "SK3483300000002101244230";
-const COMPANY_NAME = "Spevácky zbor OMNIA";
+const ACCOUNT_NUMBER = BANK_ACCOUNT_NUMBER;
+const BIC = BANK_BIC;
+const IBAN = BANK_IBAN;
+const COMPANY_NAME = ORG_NAME;
 
 const BANK_NOTE_SK = "Do správy pre prijímateľa: OMNIA";
 const BANK_NOTE_EN = "Message for recipient: OMNIA";

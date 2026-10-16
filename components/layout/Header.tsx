@@ -5,147 +5,167 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import type { Locale } from "@/lib/i18n/config";
-import { getDonateHref } from "@/lib/i18n/config";
+import { alternateLocalePath, getDonateHref, localePath } from "@/lib/i18n/config";
 import { getNavLinks } from "@/lib/i18n/nav";
 import { t } from "@/lib/i18n/strings";
-import Container from "@/components/ui/Container";
-import SocialLinks from "@/components/ui/SocialLinks";
-import LanguageSwitcher from "./LanguageSwitcher";
+import { FACEBOOK_URL, INSTAGRAM_URL } from "@/lib/content/organization";
+import { buttonClass } from "@/components/ds/Button";
 
-function HamburgerIcon({ open }: { open: boolean }) {
+function isActivePath(pathname: string, href: string) {
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
+function LanguagePill({ locale, pathname, large = false }: { locale: Locale; pathname: string; large?: boolean }) {
+  const option = (target: Locale, label: string) => {
+    const on = target === locale;
+    const cls = large
+      ? `rounded-full border border-cream/25 px-[18px] py-3 ${on ? "bg-cream text-ink" : "text-muted-ink hover:text-cream"}`
+      : `rounded-full px-2.5 py-[7px] ${on ? "bg-cream text-ink" : "text-muted-ink hover:text-cream"}`;
+    return (
+      <Link
+        href={on ? pathname : alternateLocalePath(pathname, target)}
+        className={`transition-colors ${cls}`}
+        aria-current={on ? "true" : undefined}
+        hrefLang={target}
+      >
+        {label}
+      </Link>
+    );
+  };
+
+  if (large) {
+    return (
+      <div className="flex gap-2 t-small font-semibold leading-none">
+        {option("sk", t(locale, "lang.sk"))}
+        {option("en", t(locale, "lang.en"))}
+      </div>
+    );
+  }
   return (
-    <span className="relative block h-5 w-6" aria-hidden>
-      <span
-        className={`absolute left-0 top-0 block h-0.5 w-6 rounded-full bg-accent transition-transform duration-200 ${
-          open ? "top-2 rotate-45" : ""
-        }`}
-      />
-      <span
-        className={`absolute left-0 top-2 block h-0.5 w-6 rounded-full bg-accent transition-opacity duration-200 ${
-          open ? "opacity-0" : ""
-        }`}
-      />
-      <span
-        className={`absolute left-0 top-4 block h-0.5 w-6 rounded-full bg-accent transition-transform duration-200 ${
-          open ? "top-2 -rotate-45" : ""
-        }`}
-      />
-    </span>
+    <div className="flex rounded-full border border-cream/20 p-[3px] t-label leading-none">
+      {option("sk", "SK")}
+      {option("en", "EN")}
+    </div>
   );
 }
 
 export default function Header({ locale }: { locale: Locale }) {
-  const pathname = usePathname();
+  const pathname = usePathname() ?? "/";
   const links = getNavLinks(locale);
-  const homeHref = locale === "sk" ? "/" : "/en";
   const donateHref = getDonateHref(locale);
-  const [isOpen, setIsOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    setIsOpen(false);
+    setOpen(false);
   }, [pathname]);
 
-  const linkClass = (isActive: boolean) =>
-    `text-[0.9375rem] transition-colors hover:text-accent ${isActive ? "text-accent" : "text-foreground"}`;
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [open]);
 
   return (
-    <header className="sticky top-0 z-[100] border-b border-border bg-background">
-      <Container>
-        <div className="flex h-16 items-center justify-between gap-4">
-          <Link
-            href={homeHref}
-            className="flex shrink-0 cursor-pointer items-center no-underline outline-none transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-            aria-label={locale === "sk" ? "Domov" : "Home"}
-          >
-            <Image
-              src="/logo.png"
-              alt=""
-              width={120}
-              height={40}
-              className="h-9 w-auto object-contain object-left md:h-10"
-              priority
-            />
-          </Link>
+    <header className="surface-ink sticky top-0 z-[100] bg-ink text-cream">
+      <div className="wrap flex h-[clamp(68px,6vw,84px)] items-center gap-6">
+        <Link
+          href={localePath("/", locale)}
+          className="mr-auto flex items-center gap-4"
+          aria-label={t(locale, "nav.home")}
+        >
+          <Image
+            src="/logo.png"
+            alt="OMNIA"
+            width={1227}
+            height={617}
+            className="block h-[clamp(30px,2.8vw,38px)] w-auto"
+            priority
+          />
+          <span className="hidden border-l border-cream/20 pl-4 t-label text-muted-ink min-[1360px]:block">
+            {t(locale, "header.tagline1")}
+            <br />
+            {t(locale, "header.tagline2")}
+          </span>
+        </Link>
 
-          <nav
-            className="hidden flex-nowrap items-center justify-end gap-5 whitespace-nowrap lg:flex xl:gap-6"
-            aria-label="Main"
-          >
+        <nav className="hidden gap-0.5 t-small font-medium leading-none nav:flex" aria-label={t(locale, "nav.mainLabel")}>
+          {links.map(({ href, key }) => {
+            const on = isActivePath(pathname, href);
+            return (
+              <Link
+                key={key}
+                href={href}
+                aria-current={on ? "page" : undefined}
+                className={`rounded-full px-3 py-2.5 transition-colors ${
+                  on ? "bg-gold/10 text-gold" : "text-cream hover:bg-cream/[0.08]"
+                }`}
+              >
+                {t(locale, key)}
+              </Link>
+            );
+          })}
+        </nav>
+
+        <div className="hidden nav:block">
+          <LanguagePill locale={locale} pathname={pathname} />
+        </div>
+
+        <Link href={donateHref} className={buttonClass("gold", "md")}>
+          {t(locale, "button.donate")}
+        </Link>
+
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          aria-expanded={open}
+          aria-controls="mobile-menu"
+          aria-label={t(locale, open ? "menu.close" : "menu.open")}
+          className="flex size-11 shrink-0 items-center justify-center rounded-full border border-cream/25 text-[22px] leading-none text-cream nav:hidden"
+        >
+          <span aria-hidden>{open ? "×" : "≡"}</span>
+        </button>
+      </div>
+
+      {open ? (
+        <div
+          id="mobile-menu"
+          className="absolute inset-x-0 top-full flex h-[calc(100dvh-100%)] flex-col overflow-y-auto border-t border-line-ink bg-ink px-5 pb-8 pt-2 nav:hidden"
+        >
+          <nav aria-label={t(locale, "nav.mainLabel")} className="flex flex-col">
             {links.map(({ href, key }) => {
-              const isActive = pathname === href;
+              const on = isActivePath(pathname, href);
               return (
-                <Link key={key} href={href} className={linkClass(isActive)}>
+                <Link
+                  key={key}
+                  href={href}
+                  aria-current={on ? "page" : undefined}
+                  className={`border-b border-cream/10 py-4 font-display text-[28px] font-bold leading-tight tracking-[-0.02em] ${
+                    on ? "text-gold" : "text-cream"
+                  }`}
+                >
                   {t(locale, key)}
                 </Link>
               );
             })}
-            <Link
-              href={donateHref}
-              className={`shrink-0 rounded-full px-4 py-2 font-medium text-black shadow-md transition hover:opacity-90 hover:shadow-lg ${
-                pathname === donateHref ? "bg-accent/80" : "bg-accent"
-              }`}
-            >
-              {t(locale, "button.donate")}
-            </Link>
-            <div className="hidden items-center xl:flex">
-              <SocialLinks />
-            </div>
-            <span className="border-l border-border pl-5" aria-hidden>
-              <LanguageSwitcher currentLocale={locale} />
-            </span>
           </nav>
-
-          <button
-            type="button"
-            className="inline-flex shrink-0 items-center justify-center rounded-md p-2 text-accent transition-opacity hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background lg:hidden"
-            onClick={() => setIsOpen((open) => !open)}
-            aria-expanded={isOpen}
-            aria-controls="mobile-main-nav"
-            aria-label={isOpen ? (locale === "sk" ? "Zavrieť menu" : "Close menu") : locale === "sk" ? "Otvoriť menu" : "Open menu"}
-          >
-            <HamburgerIcon open={isOpen} />
-          </button>
+          <div className="mt-6">
+            <LanguagePill locale={locale} pathname={pathname} large />
+          </div>
+          <div className="mt-7 flex gap-5 t-small font-medium">
+            <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="text-muted-ink hover:text-cream">
+              Instagram
+            </a>
+            <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer" className="text-muted-ink hover:text-cream">
+              Facebook
+            </a>
+          </div>
         </div>
-
-        {isOpen ? (
-          <nav
-            id="mobile-main-nav"
-            className="border-t border-border pb-5 pt-4 lg:hidden"
-            aria-label={locale === "sk" ? "Hlavná navigácia" : "Main navigation"}
-          >
-            <ul className="flex flex-col gap-1">
-              {links.map(({ href, key }) => {
-                const isActive = pathname === href;
-                return (
-                  <li key={key}>
-                    <Link
-                      href={href}
-                      className={`block py-2.5 ${linkClass(isActive)}`}
-                      onClick={() => setIsOpen(false)}
-                    >
-                      {t(locale, key)}
-                    </Link>
-                  </li>
-                );
-              })}
-              <li className="pt-2">
-                <Link
-                  href={donateHref}
-                  className={`inline-flex rounded-full px-4 py-2 font-medium text-black shadow-md transition hover:opacity-90 hover:shadow-lg ${
-                    pathname === donateHref ? "bg-accent/80" : "bg-accent"
-                  }`}
-                  onClick={() => setIsOpen(false)}
-                >
-                  {t(locale, "button.donate")}
-                </Link>
-              </li>
-            </ul>
-            <div className="mt-4 border-t border-border pt-4">
-              <LanguageSwitcher currentLocale={locale} />
-            </div>
-          </nav>
-        ) : null}
-      </Container>
+      ) : null}
     </header>
   );
 }

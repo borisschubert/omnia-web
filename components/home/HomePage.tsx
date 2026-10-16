@@ -1,18 +1,22 @@
 import type { Locale } from "@/lib/i18n/config";
-import Hero from "./Hero";
-import AboutSection from "./AboutSection";
-import HomeEventsSection from "./HomeEventsSection";
-import HomeNewsSection from "./HomeNewsSection";
-import GetInvolvedSection from "./GetInvolvedSection";
+import HomeHero from "./HomeHero";
+import HomeAwards from "./HomeAwards";
+import HomeConcerts from "./HomeConcerts";
+import HomeNews from "./HomeNews";
+import HomeAbout from "./HomeAbout";
+import HomeSupport from "./HomeSupport";
+import HomeJoin from "./HomeJoin";
 
 export default function HomePage({ locale }: { locale: Locale }) {
   return (
-    <>
-      <Hero locale={locale} />
-      <AboutSection locale={locale} />
-      <HomeEventsSection locale={locale} />
-      <HomeNewsSection locale={locale} />
-      <GetInvolvedSection locale={locale} />
-    </>
+    <div className="bg-cream text-body">
+      <HomeHero locale={locale} />
+      <HomeAwards locale={locale} />
+      <HomeConcerts locale={locale} />
+      <HomeNews locale={locale} />
+      <HomeAbout locale={locale} />
+      <HomeSupport locale={locale} />
+      <HomeJoin locale={locale} />
+    </div>
   );
 }

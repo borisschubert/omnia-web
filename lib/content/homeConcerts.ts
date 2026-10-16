@@ -9,6 +9,8 @@ export type HomeConcertItem = {
   dateKey: string;
   /** ISO date `YYYY-MM-DD` for sorting / month grouping (start date for ranges) */
   dateIso: string;
+  /** ISO end date for multi-day events (inclusive) */
+  endDateIso?: string;
   /** Optional override for program card date column (e.g. multi-day ranges) */
   dateDisplayKey?: string;
   eventType: ConcertEventType;
@@ -41,6 +43,7 @@ export const homeConcerts: HomeConcertItem[] = [
   {
     dateKey: "concert.s2026.nov.project.date",
     dateIso: "2026-11-26",
+    endDateIso: "2026-11-29",
     dateDisplayKey: "concert.s2026.nov.project.dateDisplay",
     eventType: "international",
     titleKey: "concert.s2026.nov.project.title",

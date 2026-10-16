@@ -6,10 +6,11 @@ import type { Locale } from "@/lib/i18n/config";
 import { t } from "@/lib/i18n/strings";
 import Container from "@/components/ui/Container";
 import LoadTitleEnter from "@/components/ui/LoadTitleEnter";
+import { ORG_ADDRESS_LINE, ORG_EMAIL, ORG_PHONE } from "@/lib/content/organization";
 
-const EMAIL = "info@omnia.sk";
-const PHONE = "+421 904 387 243";
-const ADDRESS_LINE = "Spevácky zbor OMNIA, Gaštanová 3078/4, 010 07 Žilina";
+const EMAIL = ORG_EMAIL;
+const PHONE = ORG_PHONE;
+const ADDRESS_LINE = ORG_ADDRESS_LINE;
 const MAP_QUERY = encodeURIComponent("Gaštanová 3078/4, 010 07 Žilina, Slovakia");
 const MAP_EMBED_URL = `https://maps.google.com/maps?q=${MAP_QUERY}&hl=sk&z=16&output=embed`;
 const MAP_LINK_URL = `https://www.google.com/maps/search/?api=1&query=${MAP_QUERY}`;

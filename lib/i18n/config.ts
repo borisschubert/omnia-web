@@ -39,7 +39,12 @@ export function pathWithoutLocalePrefix(pathname: string): string {
  * Get alternate locale link for current path (for language switcher).
  */
 export function alternateLocalePath(pathname: string, targetLocale: Locale): string {
-  const segment = pathWithoutLocalePrefix(pathname);
+  let segment = pathWithoutLocalePrefix(pathname);
+  // Donate page has a different slug per locale
+  if (segment === "/podporte-nas" || segment === "/donate") {
+    return getDonateHref(targetLocale);
+  }
+  if (segment.endsWith("/") && segment.length > 1) segment = segment.slice(0, -1);
   return localePath(segment === "/" ? "" : segment, targetLocale);
 }
 

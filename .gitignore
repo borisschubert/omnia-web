@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Podklady z Claude Design (lokálne, nedávať do Gitu)
+/design_handoff_omnia_web/

@@ -1,12 +1,19 @@
 import type { Metadata } from "next";
-import { Work_Sans } from "next/font/google";
+import { Figtree, Urbanist } from "next/font/google";
 import "./globals.css";
 
-const workSans = Work_Sans({
-  subsets: ["latin"],
-  variable: "--font-work-sans",
+const figtree = Figtree({
+  subsets: ["latin", "latin-ext"],
+  variable: "--font-figtree",
   display: "swap",
   weight: ["400", "500", "600"],
+});
+
+const urbanist = Urbanist({
+  subsets: ["latin", "latin-ext"],
+  variable: "--font-urbanist",
+  display: "swap",
+  weight: ["700"],
 });
 
 export const metadata: Metadata = {
@@ -20,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="sk" suppressHydrationWarning className={workSans.variable}>
+    <html lang="sk" suppressHydrationWarning className={`${figtree.variable} ${urbanist.variable}`}>
       <body className="antialiased font-sans">
         {children}
       </body>

@@ -1,6 +1,4 @@
-const FACEBOOK_URL = "https://www.facebook.com/omniaslovakia";
-const INSTAGRAM_URL = "https://www.instagram.com/omniaslovakia/";
-const YOUTUBE_URL = "https://www.youtube.com/@OmniaSlovakia/videos";
+import { FACEBOOK_URL, INSTAGRAM_URL, YOUTUBE_URL } from "@/lib/content/organization";
 
 const linkClass =
   "p-2 rounded-full text-foreground/70 hover:text-accent hover:bg-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/60";
