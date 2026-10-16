@@ -15,11 +15,33 @@ Komunikácia prebieha po slovensky.
   = do 1-2 minút live na omniachoir.sk. Netreba nič robiť vo Vercel dashboarde.
 - Lokálny dev server: `npm run dev`, beží na http://localhost:3000 (hot-reload).
 - Git remote (origin) má HTTPS URL s vloženým GitHub Personal Access Tokenom —
-  push/pull by mal fungovať bez pýtania hesla. Ak token vyprší (chyba
-  "Invalid username or token"), treba vygenerovať nový fine-grained token
-  (Settings → Developer settings → Personal access tokens, scope: len tento
-  repo, Contents: Read and write) a nastaviť ho:
-  `git remote set-url origin https://NOVY_TOKEN@github.com/borisschubert/omnia-web.git`
+  push/pull by mal fungovať bez pýtania hesla. Ak token vyprší alebo push
+  zlyhá (chyba "Invalid username or token" / "could not read Username"),
+  treba vygenerovať nový fine-grained token (Settings → Developer settings →
+  Personal access tokens → Fine-grained, len repo omnia-web, Contents: Read
+  and write). Token nastavuje Boris sám v Termináli (Claude tokeny nezadáva):
+  `git remote set-url origin https://borisschubert:NOVY_TOKEN@github.com/borisschubert/omnia-web.git`
+  Používateľské meno v URL je dôležité — credential helper `gh` v
+  ~/.gitconfig na tomto Macu nefunguje ("Bad CPU type"), takže git sa nesmie
+  pýtať na heslo. Hláška "gh auth git-credential store … Bad CPU type" po
+  úspešnom pushi je neškodná.
+
+## Redizajn (október 2026)
+- Prebieha na vetve `redesign` (push → Vercel preview, NIE produkcia). `main`
+  = živý web, redizajn sa tam zmerguje až po Borisovom schválení.
+- Záloha pred redizajnom: git tag `zaloha-pred-redizajnom`.
+- Podklady z Claude Design sú lokálne v `design_handoff_omnia_web/`
+  (README.md s tokenmi, screenshoty, HTML) — v .gitignore, necommitovať.
+- Pravidlo: texty a údaje zo súčasného webu, z dizajnu len vzhľad a štruktúra.
+  Sekcie bez podkladov (video, Instagram, PDF, logá partnerov) sú skryté.
+- Nový dizajnový systém: tokeny a typografia (`t-display`, `t-h2`, `t-h3`,
+  `t-body`, `t-small`, `t-label`, `wrap`, `section-y`) v `app/globals.css`,
+  komponenty v `components/ds/`. Animácie: `data-reveal`, `data-parallax`
+  (MotionRoot v Shell).
+- Hotové: základ, hlavička, päta, domov. Ďalej: Vystúpenia, Aktuality +
+  detail, Ocenenia, O nás, Pridaj sa, Podporte nás, Kontakt, upratanie.
+- Lokálny dev server štartuje na tomto Macu 3–5 min; pri zaseknutí pomôže
+  zmazať `.next` a reštartovať.
 
 ## i18n
 Texty sú v `lib/i18n/strings/sk.json` a `lib/i18n/strings/en.json`, kľúč →
