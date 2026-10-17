@@ -71,7 +71,7 @@ export default function Header({ locale }: { locale: Locale }) {
   }, [open]);
 
   return (
-    <header className="surface-cream sticky top-0 z-[100] border-b border-hairline bg-snow/95 text-coal backdrop-blur">
+    <header className="surface-cream sticky top-0 z-[100] border-b border-hairline bg-snow text-coal">
       <div className="wrap flex h-[clamp(68px,6vw,84px)] items-center gap-6">
         <Link
           href={localePath("/", locale)}

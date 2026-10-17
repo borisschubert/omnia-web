@@ -14,6 +14,6 @@ export const motion = {
   start: "top 85%",
   /** Parallax travel in % of the image height (image is 25 % taller than its frame) */
   parallax: 10,
-  /** Lenis smooth scroll */
-  lerp: 0.1,
+  /** Lenis smooth scroll — 0.1 felt heavy (too much glide), 0.2 follows the wheel closely */
+  lerp: 0.2,
 } as const;
