@@ -43,7 +43,6 @@ export default function HomeSupport({ locale }: { locale: Locale }) {
                   value={BANK_IBAN}
                   label={t(locale, "home.support.copyIban")}
                   copiedLabel={t(locale, "home.support.copied")}
-                  className="!bg-coal !text-snow hover:!bg-brass"
                 />
               </span>
             </li>

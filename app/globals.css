@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
-/* Design system: dark theme, vibrant gold accent (Omnia / Ocenenia standard) */
+/* Base page colours (legacy variables, kept for body) */
 :root {
-  --background: #111111;
+  --background: #ffffff;
   --background-elevated: #1e1e1e;
   --divider: rgba(245, 245, 244, 0.06);
-  --foreground: #f5f5f4;
+  --foreground: #151515;
   --foreground-muted: rgba(245, 245, 244, 0.7);
   /* Primary brand gold — matches Ocenenia spotlight stats */
   --primary-gold: #ffd700;
@@ -23,7 +23,6 @@
   --color-primary-gold: var(--primary-gold);
   --color-border: var(--border);
   --font-sans: var(--font-figtree), system-ui, sans-serif;
-  --font-display: var(--font-urbanist), var(--font-figtree), system-ui, sans-serif;
   --font-serif-light: var(--font-raleway), var(--font-figtree), system-ui, sans-serif;
   --font-mono: ui-monospace, monospace;
 
@@ -47,7 +46,7 @@
   --color-line: rgba(28, 26, 23, 0.15);
   --color-line-ink: rgba(246, 241, 231, 0.14);
 
-  /* Experiment (pokus-predloha): white + black + metallic gold */
+  /* Design: white + black + metallic gold */
   --color-snow: #ffffff;
   --color-mist: #f4f3f1;
   --color-coal: #151515;
@@ -61,37 +60,7 @@
   --breakpoint-nav: 1100px;
 }
 
-/* ---------- Redesign typography (6 sizes) ---------- */
-@utility t-display {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(42px, 6vw, 88px);
-  line-height: 1.02;
-  letter-spacing: -0.025em;
-  text-wrap: balance;
-}
-
-@utility t-h2 {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(32px, 3.8vw, 54px);
-  line-height: 1.06;
-  letter-spacing: -0.025em;
-}
-
-@utility t-h3 {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(22px, 2vw, 28px);
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-}
-
-@utility t-body {
-  font-size: clamp(17px, 1.3vw, 18px);
-  line-height: 1.6;
-}
-
+/* ---------- Small text helpers (header, footer) ---------- */
 @utility t-small {
   font-size: 15px;
   line-height: 1.5;
@@ -110,17 +79,11 @@
   padding-inline: clamp(20px, 4vw, 56px);
 }
 
-@utility wrap-wide {
-  max-width: 1440px;
-  margin-inline: auto;
-  padding-inline: clamp(12px, 2vw, 32px);
-}
-
 @utility section-y {
   padding-block: clamp(64px, 8vw, 120px);
 }
 
-/* ---------- Experiment (pokus-predloha) ---------- */
+/* ---------- Design: white / black / metallic gold (Raleway) ---------- */
 @utility font-pk {
   font-family: var(--font-serif-light);
   font-variant-numeric: lining-nums;
@@ -171,14 +134,14 @@
     animation: motion-failsafe 0s 3s forwards;
   }
 
-  /* A6 curtain: frame starts fully clipped from the top */
-  .js [data-curtain] {
+  /* A6 curtain: frame starts clipped until MotionRoot takes over (it then sets the start state inline);
+     frames mounted later (load more, filters) simply show */
+  .js:not(.motion-ready) [data-curtain] {
     clip-path: inset(100% 0 0 0);
     animation: motion-failsafe 0s 3s forwards;
   }
 
-  .js.motion-ready [data-split],
-  .js.motion-ready [data-curtain] {
+  .js.motion-ready [data-split] {
     animation: none;
   }
 }
@@ -303,97 +266,18 @@ body {
   letter-spacing: 0.01em;
 }
 
-/* About section: staggered fact reveal */
-.facts-visible .fact-block {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Concerts section: staggered event reveal */
-.concerts-visible .concert-row {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Awards page: intro — center spotlight (bronze) fading to black at edges */
-.awards-intro-hero {
-  position: relative;
-  background-color: #000000;
-  background-image:
-    radial-gradient(ellipse 95% 80% at 50% 52%, rgb(42 34 13) 0%, rgba(42, 34, 13, 0.55) 22%, rgba(18, 15, 8, 0.75) 48%, rgba(5, 5, 5, 0.95) 72%, #000000 100%);
-}
-
-.awards-intro-hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(ellipse 70% 55% at 50% 48%, rgba(255, 215, 0, 0.07) 0%, transparent 50%);
-}
-
-/* Program page: same spotlight language as Awards intro */
-.program-intro-hero {
-  position: relative;
-  background-color: #000000;
-  background-image:
-    radial-gradient(ellipse 95% 80% at 50% 52%, rgb(42 34 13) 0%, rgba(42, 34, 13, 0.55) 22%, rgba(18, 15, 8, 0.75) 48%, rgba(5, 5, 5, 0.95) 72%, #000000 100%);
-}
-
-.program-intro-hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(ellipse 70% 55% at 50% 48%, rgba(255, 215, 0, 0.07) 0%, transparent 50%);
-}
-
-/* Vibrant gold stats + subtle depth (drop-shadow on wrapper) */
-.awards-stat-number {
-  color: var(--primary-gold);
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.65)) drop-shadow(0 1px 0 rgba(0, 0, 0, 0.4));
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .awards-stat-number {
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
-  }
-
-  .gold-hover:hover,
-  .premium-card-hover:hover {
-    transform: none !important;
-  }
-}
-
-/* Contact page: embedded Google Map — dark, site-consistent look */
+/* Contact page: embedded Google Map — quiet grey to match the black / white / gold look */
 .contact-map-frame {
   position: relative;
   overflow: hidden;
-  border-radius: 1rem;
-  border: 1px solid var(--divider);
-  background: #0a0a0a;
+  background: var(--color-mist);
 }
 
 .contact-map-frame iframe {
   display: block;
   width: 100%;
-  height: min(50vh, 420px);
-  min-height: 280px;
+  height: min(56vh, 480px);
+  min-height: 300px;
   border: 0;
-  filter: grayscale(0.85) invert(0.92) contrast(1.05) brightness(0.9);
-}
-
-/* Premium micro-interactions — transform only, mouse only */
-.gold-hover,
-.premium-card-hover {
-  transition: transform var(--dur-fast) var(--ease-out);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .gold-hover:hover {
-    transform: scale(1.03);
-  }
-
-  .premium-card-hover:hover {
-    transform: scale(1.02);
-  }
+  filter: grayscale(1) contrast(1.05);
 }

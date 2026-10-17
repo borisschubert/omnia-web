@@ -43,7 +43,8 @@ Komunikácia prebieha po slovensky.
   komponenty predlohy v `components/pk/` (CircleCta, ArrowLink,
   PkSectionHeader). Biela sticky hlavička (liquid glass Boris zamietol).
   Fotky farebné s jemným zjednotením (`photo`), hero portrét čiernobiely (`bw`).
-  Domovská stránka je hotová v tomto štýle, ostatné podstránky ešte v starom.
+  Všetky stránky sú v tomto štýle (17. 10. 2026). Podstránky začínajú
+  `components/pk/PageHero`, tlačidlá `PkButton`, štítky `Kicker`.
 - Animácie = preset „Elegantný / prémiový“ z `ANIMATIONS.md` (sekcia E +
   pravidlá sekcie 0): Lenis, `data-split` (nadpisy), `data-curtain` (fotky),
   `data-parallax`, `RollText` (tlačidlá/menu), `u-line` (odkazy), prechody
@@ -52,8 +53,9 @@ Komunikácia prebieha po slovensky.
   nepoužíva.
 - „Pridaj sa“ nie je v hlavnom menu (stránka existuje, odkaz je na domove).
 - Otvorené: text O nás píše o 4 medailách z WCG, zoznam ocenení ich má 6.
-- Ďalej: Vystúpenia, Aktuality + detail, Ocenenia, O nás, Pridaj sa, Podporte
-  nás, Kontakt v novom štýle, upratanie (nepoužité `components/home/*Section.tsx`).
+- Staré komponenty (`components/ui`, `donate`, `concerts`, staré home sekcie)
+  sú zmazané. Ďalej: Boris skontroluje podstránky → push `redesign` (preview)
+  → po schválení merge do `main`.
 - Lokálny dev server štartuje na tomto Macu 3–5 min; pri zaseknutí pomôže
   zmazať `.next` a reštartovať.
 

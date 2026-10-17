@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { usePathname } from "next/navigation";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -60,8 +60,8 @@ export default function MotionRoot() {
     };
   }, []);
 
-  // A3 / A6 / A7 for the current page
-  useEffect(() => {
+  // A3 / A6 / A7 for the current page — layout effect so start states are set before the first paint
+  useLayoutEffect(() => {
     if (!motionAllowed()) return;
     setup();
     document.documentElement.classList.add("motion-ready");

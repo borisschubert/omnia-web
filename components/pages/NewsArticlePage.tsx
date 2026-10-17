@@ -1,109 +1,87 @@
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Locale } from "@/lib/i18n/config";
 import { localePath } from "@/lib/i18n/config";
 import { getNewsArticleBySlug } from "@/lib/content/newsArticles";
 import { t } from "@/lib/i18n/strings";
-import Container from "@/components/ui/Container";
+import ArrowLink from "@/components/pk/ArrowLink";
+import Kicker from "@/components/pk/Kicker";
+import PkButton from "@/components/pk/PkButton";
 
-const goldPrimaryBtn =
-  "gold-hover inline-flex min-h-[3rem] w-full max-w-3xl items-center justify-center rounded-full bg-[var(--primary-gold)] px-10 py-3 text-center text-base font-semibold text-black shadow-[0_0_28px_-6px_rgba(255,215,0,0.45)] transition-[box-shadow,opacity] duration-300 hover:opacity-95 hover:shadow-[0_0_40px_-4px_rgba(255,215,0,0.55)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary-gold)]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505]";
+const bodyClass =
+  "m-0 font-pk text-[clamp(16px,1.2vw,18px)] leading-[1.9] text-coal/85 [&_a]:font-semibold [&_a]:text-brass [&_a]:underline [&_a]:decoration-1 [&_a]:underline-offset-4";
 
-const insetImageFrame =
-  "relative mx-auto h-[min(400px,50vh)] w-full max-w-3xl overflow-hidden rounded-2xl border border-[var(--primary-gold)]/30 bg-black shadow-[0_16px_40px_-20px_rgba(0,0,0,0.75)]";
-
-const bodyParagraphClass =
-  "text-left text-[0.9375rem] leading-relaxed text-[#FFFFFF]/88 md:text-base [&_a]:font-medium [&_a]:text-[var(--primary-gold)] [&_a]:underline-offset-2 [&_a]:transition-colors hover:[&_a]:text-white hover:[&_a]:underline";
-
-function ArticleBodyParagraph({ locale, textKey }: { locale: Locale; textKey: string }) {
+function Paragraph({ locale, textKey }: { locale: Locale; textKey: string }) {
   const content = t(locale, textKey);
-  if (content.includes("<a ")) {
-    return <p className={bodyParagraphClass} dangerouslySetInnerHTML={{ __html: content }} />;
-  }
-  return <p className={bodyParagraphClass}>{content}</p>;
+  if (content.includes("<a ")) return <p className={bodyClass} dangerouslySetInnerHTML={{ __html: content }} />;
+  return <p className={bodyClass}>{content}</p>;
 }
 
-export default function NewsArticlePage({
-  locale,
-  slug,
-}: {
-  locale: Locale;
-  slug: string;
-}) {
+export default function NewsArticlePage({ locale, slug }: { locale: Locale; slug: string }) {
   const article = getNewsArticleBySlug(slug);
   if (!article) notFound();
+  const archive = localePath("/aktuality", locale);
 
   return (
-    <main className="min-h-screen bg-[#050505]">
-      <article className="border-b border-[rgba(255,215,0,0.08)] py-10 md:py-14 lg:py-16">
-        <Container className="mx-auto max-w-3xl px-4 sm:px-6">
-          <Link
-            href={localePath("/aktuality", locale)}
-            className="text-sm font-medium text-[var(--primary-gold)] transition-opacity hover:opacity-90"
-          >
-            ← {t(locale, "page.news.backToArchive")}
-          </Link>
+    <article className="surface-cream bg-snow text-coal">
+      <div className="wrap pb-[clamp(64px,8vw,120px)] pt-[clamp(40px,5vw,80px)]">
+        <div className="mx-auto max-w-[760px]">
+          <ArrowLink href={archive} back>
+            {t(locale, "page.news.backToArchive")}
+          </ArrowLink>
 
-          <p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--primary-gold)]">
-            {t(locale, article.categoryKey)}
-          </p>
-          <time className="mt-2 block text-sm text-[#FFFFFF]/55">{t(locale, article.dateKey)}</time>
-          <h1 data-split className="mt-4 text-3xl font-semibold leading-tight tracking-tight text-white md:text-4xl lg:text-[2.5rem] lg:leading-[1.2]">
-            {t(locale, article.titleKey)}
-          </h1>
-
-          <div data-curtain className={`mt-8 md:mt-10 ${insetImageFrame}`}>
-            <Image
-              src={article.image}
-              alt=""
-              fill
-              className="object-contain object-center bg-[#050505]"
-              sizes="(max-width: 768px) 100vw, 672px"
-              priority
-            />
+          <div className="mt-[clamp(32px,4vw,56px)] flex flex-col gap-4">
+            <Kicker>
+              <span className="text-brass">{t(locale, article.categoryKey)}</span> · {t(locale, article.dateKey)}
+            </Kicker>
+            <h1
+              data-split
+              className="m-0 text-balance font-pk text-[clamp(36px,4.6vw,66px)] font-light leading-[1.1] tracking-[-0.025em]"
+            >
+              {t(locale, article.titleKey)}
+            </h1>
           </div>
+        </div>
 
-          <div className="mx-auto mt-8 max-w-3xl space-y-6 md:mt-10">
-            {article.bodyKeys.map((key) => (
-              <ArticleBodyParagraph key={key} locale={locale} textKey={key} />
-            ))}
-          </div>
+        <div data-curtain className="relative mx-auto mt-[clamp(32px,4vw,56px)] aspect-[3/2] max-w-[1080px] overflow-hidden bg-mist">
+          <Image
+            src={article.image}
+            alt=""
+            fill
+            priority
+            sizes="(max-width: 1100px) 100vw, 1080px"
+            className="photo object-contain"
+          />
+        </div>
 
-          {article.gallery?.length ? (
-            <div className="mx-auto mt-10 max-w-3xl space-y-6">
-              {article.gallery.map((src) => (
-                <div
-                  key={src}
-                  className="overflow-hidden rounded-2xl border border-[var(--primary-gold)]/30 bg-black shadow-[0_16px_40px_-20px_rgba(0,0,0,0.75)]"
-                >
-                  <Image
-                    src={src}
-                    alt=""
-                    width={2000}
-                    height={1313}
-                    className="h-auto w-full"
-                    sizes="(max-width: 768px) 100vw, 672px"
-                  />
-                </div>
-              ))}
-            </div>
-          ) : null}
+        <div className="mx-auto mt-[clamp(32px,4vw,56px)] flex max-w-[760px] flex-col gap-6">
+          {article.bodyKeys.map((key) => (
+            <Paragraph key={key} locale={locale} textKey={key} />
+          ))}
 
           {article.donioUrl && article.donioCtaKey ? (
-            <div className="mt-8 w-full">
-              <a
-                href={article.donioUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={goldPrimaryBtn}
-              >
-                {t(locale, article.donioCtaKey)}
-              </a>
-            </div>
+            <PkButton href={article.donioUrl} external className="mt-4 self-start">
+              {t(locale, article.donioCtaKey)}
+            </PkButton>
           ) : null}
-        </Container>
-      </article>
-    </main>
+        </div>
+
+        {article.gallery?.length ? (
+          <div className="mx-auto mt-[clamp(40px,5vw,72px)] flex max-w-[1080px] flex-col gap-[clamp(14px,1.6vw,24px)]">
+            {article.gallery.map((src) => (
+              <div key={src} data-curtain className="overflow-hidden bg-mist">
+                <Image src={src} alt="" width={2000} height={1313} className="photo h-auto w-full" sizes="(max-width: 1100px) 100vw, 1080px" />
+              </div>
+            ))}
+          </div>
+        ) : null}
+
+        <div className="mx-auto mt-[clamp(48px,6vw,88px)] max-w-[760px] border-t border-hairline pt-8">
+          <ArrowLink href={archive} back>
+            {t(locale, "page.news.backToArchive")}
+          </ArrowLink>
+        </div>
+      </div>
+    </article>
   );
 }

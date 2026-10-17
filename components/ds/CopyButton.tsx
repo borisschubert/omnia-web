@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { buttonClass } from "./Button";
+import { pkButtonClass } from "@/components/pk/PkButton";
 import RollText from "./RollText";
 
 /** Copies `value` to the clipboard; label switches to `copiedLabel` for 2 s */
@@ -29,7 +29,7 @@ export default function CopyButton({
   }
 
   return (
-    <button type="button" onClick={copy} className={buttonClass("gold", "md", className)} aria-live="polite">
+    <button type="button" onClick={copy} className={pkButtonClass("dark", className)} aria-live="polite">
       <RollText>{copied ? copiedLabel : label}</RollText>
     </button>
   );

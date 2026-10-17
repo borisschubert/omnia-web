@@ -1,9 +1,5 @@
 /** Aktuality feed + detail routes (static export) */
 
-/** Card thumbnails: muted by default, full color on card hover (parent needs `group`) */
-export const newsCardImageClass =
-  "object-contain object-center bg-[#050505] opacity-80 contrast-95 brightness-90 grayscale-[20%] transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0 group-hover:brightness-100";
-
 export const newsArticleSlugs = [
   "world-choir-games-2026-dve-zlate-medaily",
   "staromestske-slavnosti-zilina",

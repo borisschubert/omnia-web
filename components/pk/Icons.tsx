@@ -1,4 +1,4 @@
-/** Thin line icons for the experiment design (pokus-predloha) */
+/** Thin line icons of the white / black / gold design */
 
 export function LongArrow({ className = "" }: { className?: string }) {
   return (
