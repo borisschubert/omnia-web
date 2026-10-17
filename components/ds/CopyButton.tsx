@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { buttonClass } from "./Button";
+import RollText from "./RollText";
 
 /** Copies `value` to the clipboard; label switches to `copiedLabel` for 2 s */
 export default function CopyButton({
@@ -29,7 +30,7 @@ export default function CopyButton({
 
   return (
     <button type="button" onClick={copy} className={buttonClass("gold", "md", className)} aria-live="polite">
-      {copied ? copiedLabel : label}
+      <RollText>{copied ? copiedLabel : label}</RollText>
     </button>
   );
 }

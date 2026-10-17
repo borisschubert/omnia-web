@@ -36,10 +36,24 @@ Komunikácia prebieha po slovensky.
   Sekcie bez podkladov (video, Instagram, PDF, logá partnerov) sú skryté.
 - Nový dizajnový systém: tokeny a typografia (`t-display`, `t-h2`, `t-h3`,
   `t-body`, `t-small`, `t-label`, `wrap`, `section-y`) v `app/globals.css`,
-  komponenty v `components/ds/`. Animácie: `data-reveal`, `data-parallax`
-  (MotionRoot v Shell).
-- Hotové: základ, hlavička, päta, domov. Ďalej: Vystúpenia, Aktuality +
-  detail, Ocenenia, O nás, Pridaj sa, Podporte nás, Kontakt, upratanie.
+  komponenty v `components/ds/`.
+- **Smer od 17. 10. 2026 (Borisova predloha „Jude School of Music“):** biela +
+  čierna + kovová zlatá (`snow`, `mist`, `coal`, `brass`, `brass-soft`,
+  `graphite`, `hairline`), písmo Raleway (`font-pk`) s kontrastom tenká/hrubá,
+  komponenty predlohy v `components/pk/` (CircleCta, ArrowLink,
+  PkSectionHeader). Biela sticky hlavička (liquid glass Boris zamietol).
+  Fotky farebné s jemným zjednotením (`photo`), hero portrét čiernobiely (`bw`).
+  Domovská stránka je hotová v tomto štýle, ostatné podstránky ešte v starom.
+- Animácie = preset „Elegantný / prémiový“ z `ANIMATIONS.md` (sekcia E +
+  pravidlá sekcie 0): Lenis, `data-split` (nadpisy), `data-curtain` (fotky),
+  `data-parallax`, `RollText` (tlačidlá/menu), `u-line` (odkazy), prechody
+  stránok cez React `<ViewTransition>` v `template.tsx`. Hodnoty v
+  `lib/motion.ts` + CSS premenné `--ease-out`, `--dur-*`. `data-reveal` sa už
+  nepoužíva.
+- „Pridaj sa“ nie je v hlavnom menu (stránka existuje, odkaz je na domove).
+- Otvorené: text O nás píše o 4 medailách z WCG, zoznam ocenení ich má 6.
+- Ďalej: Vystúpenia, Aktuality + detail, Ocenenia, O nás, Pridaj sa, Podporte
+  nás, Kontakt v novom štýle, upratanie (nepoužité `components/home/*Section.tsx`).
 - Lokálny dev server štartuje na tomto Macu 3–5 min; pri zaseknutí pomôže
   zmazať `.next` a reštartovať.
 

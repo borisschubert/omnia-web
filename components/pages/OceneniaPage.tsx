@@ -104,7 +104,7 @@ function AwardsIntroBlock({ locale }: { locale: Locale }) {
       }}
     >
       <LoadTitleEnter>
-        <h1 className="relative text-2xl font-semibold tracking-tight text-white md:text-3xl after:mt-2 after:block after:h-px after:w-12 after:content-[''] after:bg-accent">
+        <h1 data-split className="relative text-2xl font-semibold tracking-tight text-white md:text-3xl after:mt-2 after:block after:h-px after:w-12 after:content-[''] after:bg-accent">
           {t(locale, "page.awards.title")}
         </h1>
       </LoadTitleEnter>

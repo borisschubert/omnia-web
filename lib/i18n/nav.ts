@@ -6,7 +6,6 @@ export const navItems: { path: string; key: string }[] = [
   { path: "/program", key: "nav.program" },
   { path: "/aktuality", key: "nav.news" },
   { path: "/ocenenia", key: "nav.awards" },
-  { path: "/pridaj-sa", key: "nav.join" },
   { path: "/kontakt", key: "nav.contact" },
 ];
 

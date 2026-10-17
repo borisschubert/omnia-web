@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Figtree, Urbanist } from "next/font/google";
+import { Figtree, Raleway, Urbanist } from "next/font/google";
 import "./globals.css";
 
 const figtree = Figtree({
@@ -16,6 +16,14 @@ const urbanist = Urbanist({
   weight: ["700"],
 });
 
+/* Experiment (pokus-predloha): thin + heavy display contrast like the reference */
+const raleway = Raleway({
+  subsets: ["latin", "latin-ext"],
+  variable: "--font-raleway",
+  display: "swap",
+  weight: ["300", "400", "600", "700", "800"],
+});
+
 export const metadata: Metadata = {
   title: "Miešaný spevácky zbor Omnia",
   description: "Mixed choir Omnia",
@@ -27,7 +35,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="sk" suppressHydrationWarning className={`${figtree.variable} ${urbanist.variable}`}>
+    <html lang="sk" suppressHydrationWarning className={`${figtree.variable} ${urbanist.variable} ${raleway.variable}`}>
+      <head>
+        {/* Motion start states only apply once JS is known to run (ANIMATIONS.md rule 7) */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+      </head>
       <body className="antialiased font-sans">
         {children}
       </body>

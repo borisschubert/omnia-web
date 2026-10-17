@@ -110,8 +110,9 @@ export default function JoinPage({ locale }: { locale: Locale }) {
   return (
     <main className="min-h-screen bg-[#050505]">
       <section className="relative min-h-[min(85vh,820px)] w-full overflow-hidden sm:min-h-[80vh] md:min-h-[85vh]">
-        <div className="pointer-events-none absolute inset-0" aria-hidden>
+        <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
           <Image
+            data-parallax
             src="/hero.jpg"
             alt=""
             fill
@@ -128,7 +129,7 @@ export default function JoinPage({ locale }: { locale: Locale }) {
             <RevealSection>
               <div className="mx-auto flex max-w-3xl flex-col items-center">
                 <LoadTitleEnter>
-                  <h1
+                  <h1 data-split
                     className={`relative text-2xl font-semibold tracking-tight text-[#FFFFFF] md:text-4xl md:leading-tight lg:text-[2.5rem] after:mx-auto after:mt-3 after:block after:h-px after:w-12 after:content-[''] after:bg-[var(--primary-gold)] ${joinHeroTitleShadow}`}
                   >
                     {t(locale, "page.join.heroTitle")}
@@ -146,7 +147,7 @@ export default function JoinPage({ locale }: { locale: Locale }) {
       <section className="border-t border-[rgba(255,215,0,0.08)] py-16 md:py-20 lg:py-24">
         <Container>
           <RevealSection>
-            <h2 className="relative mx-auto w-fit text-center text-xl font-semibold tracking-tight text-white md:text-2xl after:mx-auto after:mt-2 after:block after:h-px after:w-12 after:content-[''] after:bg-accent">
+            <h2 data-split className="relative mx-auto w-fit text-center text-xl font-semibold tracking-tight text-white md:text-2xl after:mx-auto after:mt-2 after:block after:h-px after:w-12 after:content-[''] after:bg-accent">
               {t(locale, "page.join.whyHeading")}
             </h2>
             <div className="mt-12 grid gap-6 md:grid-cols-3 md:gap-8">
@@ -186,7 +187,7 @@ export default function JoinPage({ locale }: { locale: Locale }) {
       <section className="py-12 md:py-16">
         <Container>
           <RevealSection>
-            <h2 className="relative mx-auto w-fit text-center text-xl font-semibold tracking-tight text-white md:text-2xl after:mx-auto after:mt-2 after:block after:h-px after:w-12 after:content-[''] after:bg-accent">
+            <h2 data-split className="relative mx-auto w-fit text-center text-xl font-semibold tracking-tight text-white md:text-2xl after:mx-auto after:mt-2 after:block after:h-px after:w-12 after:content-[''] after:bg-accent">
               {t(locale, "page.join.galleryHeading")}
             </h2>
             <ul className="mt-10 grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4" role="list">
@@ -206,7 +207,7 @@ export default function JoinPage({ locale }: { locale: Locale }) {
         <Container>
           <RevealSection>
             <div className="mx-auto max-w-2xl text-center">
-              <h2 className="relative mx-auto inline-block text-xl font-semibold tracking-tight text-white md:text-2xl after:mx-auto after:mt-2 after:block after:h-px after:w-12 after:content-[''] after:bg-accent">
+              <h2 data-split className="relative mx-auto inline-block text-xl font-semibold tracking-tight text-white md:text-2xl after:mx-auto after:mt-2 after:block after:h-px after:w-12 after:content-[''] after:bg-accent">
                 {t(locale, "page.join.whoTitle")}
               </h2>
               <p className="mt-8 text-[0.9375rem] leading-relaxed text-[#FFFFFF] md:text-base">

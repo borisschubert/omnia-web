@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-/** Underlined "→" link used next to section titles and in cards */
+/** "→" link used next to section titles and in cards; underline draws in on hover (C3) */
 export default function TextLink({
   href,
   tone = "cream",
@@ -15,14 +15,12 @@ export default function TextLink({
   className?: string;
   children: ReactNode;
 }) {
-  const cls = `inline-block border-b-[1.5px] pb-[3px] t-small font-semibold leading-tight transition-colors ${
-    tone === "ink"
-      ? "border-gold text-gold hover:text-gold-hover hover:border-gold-hover"
-      : "border-body text-body hover:border-gold-deep hover:text-gold-deep"
+  const cls = `inline-block t-small font-semibold leading-tight transition-colors duration-200 ${
+    tone === "ink" ? "text-gold hover:text-gold-hover" : "text-body hover:text-gold-deep"
   } ${className}`;
   const content = (
     <>
-      {children} <span aria-hidden>→</span>
+      <span className="u-line">{children}</span> <span aria-hidden>→</span>
     </>
   );
   if (external) {

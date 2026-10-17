@@ -49,11 +49,11 @@ export default function NewsArticlePage({
             {t(locale, article.categoryKey)}
           </p>
           <time className="mt-2 block text-sm text-[#FFFFFF]/55">{t(locale, article.dateKey)}</time>
-          <h1 className="mt-4 text-3xl font-semibold leading-tight tracking-tight text-white md:text-4xl lg:text-[2.5rem] lg:leading-[1.2]">
+          <h1 data-split className="mt-4 text-3xl font-semibold leading-tight tracking-tight text-white md:text-4xl lg:text-[2.5rem] lg:leading-[1.2]">
             {t(locale, article.titleKey)}
           </h1>
 
-          <div className={`mt-8 md:mt-10 ${insetImageFrame}`}>
+          <div data-curtain className={`mt-8 md:mt-10 ${insetImageFrame}`}>
             <Image
               src={article.image}
               alt=""

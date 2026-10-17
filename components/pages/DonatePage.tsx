@@ -182,7 +182,7 @@ export default function DonatePage({ locale }: { locale: Locale }) {
         <div className="relative z-10">
           <Container>
             <LoadTitleEnter>
-              <h1 className="relative mx-auto w-fit text-center text-2xl font-semibold tracking-tight text-[var(--primary-gold)] md:text-3xl lg:text-[2rem] after:mx-auto after:mt-2 after:block after:h-px after:w-12 after:content-[''] after:bg-[var(--primary-gold)]">
+              <h1 data-split className="relative mx-auto w-fit text-center text-2xl font-semibold tracking-tight text-[var(--primary-gold)] md:text-3xl lg:text-[2rem] after:mx-auto after:mt-2 after:block after:h-px after:w-12 after:content-[''] after:bg-[var(--primary-gold)]">
                 {t(locale, "donate.hero.title")}
               </h1>
             </LoadTitleEnter>
@@ -197,7 +197,7 @@ export default function DonatePage({ locale }: { locale: Locale }) {
             </div>
 
             <div className="mx-auto mt-16 max-w-2xl">
-              <h2 className="relative mx-auto w-fit text-center text-xl font-semibold tracking-tight text-white md:text-2xl after:mx-auto after:mt-2 after:block after:h-px after:w-12 after:content-[''] after:bg-accent">
+              <h2 data-split className="relative mx-auto w-fit text-center text-xl font-semibold tracking-tight text-white md:text-2xl after:mx-auto after:mt-2 after:block after:h-px after:w-12 after:content-[''] after:bg-accent">
                 {t(locale, "donate.bank.title")}
               </h2>
               <div className={`mt-8 space-y-6 p-6 md:p-8 ${CARD_BORDER}`}>
@@ -238,7 +238,7 @@ export default function DonatePage({ locale }: { locale: Locale }) {
 
       <section className="border-b border-[rgba(255,215,0,0.08)] py-14 md:py-20">
         <Container>
-          <h2 className="relative mx-auto w-fit text-center text-xl font-semibold tracking-tight text-white md:text-2xl after:mx-auto after:mt-2 after:block after:h-px after:w-12 after:content-[''] after:bg-accent">
+          <h2 data-split className="relative mx-auto w-fit text-center text-xl font-semibold tracking-tight text-white md:text-2xl after:mx-auto after:mt-2 after:block after:h-px after:w-12 after:content-[''] after:bg-accent">
             {t(locale, "donate.options.title")}
           </h2>
           <div className="mt-12 grid gap-6 md:grid-cols-3 md:gap-8">

@@ -24,6 +24,7 @@
   --color-border: var(--border);
   --font-sans: var(--font-figtree), system-ui, sans-serif;
   --font-display: var(--font-urbanist), var(--font-figtree), system-ui, sans-serif;
+  --font-serif-light: var(--font-raleway), var(--font-figtree), system-ui, sans-serif;
   --font-mono: ui-monospace, monospace;
 
   /* Redesign 2026 — tokens from design_handoff README */
@@ -45,6 +46,16 @@
   --color-tag: #5c4511;
   --color-line: rgba(28, 26, 23, 0.15);
   --color-line-ink: rgba(246, 241, 231, 0.14);
+
+  /* Experiment (pokus-predloha): white + black + metallic gold */
+  --color-snow: #ffffff;
+  --color-mist: #f4f3f1;
+  --color-coal: #151515;
+  --color-coal-2: #222222;
+  --color-brass: #b08a3e;
+  --color-brass-soft: #d8c59c;
+  --color-graphite: #6f6f6f;
+  --color-hairline: rgba(21, 21, 21, 0.12);
 
   /* Full navigation from this width; hamburger below */
   --breakpoint-nav: 1100px;
@@ -109,52 +120,165 @@
   padding-block: clamp(64px, 8vw, 120px);
 }
 
-/* ---------- Redesign motion ---------- */
-@keyframes page-enter {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
+/* ---------- Experiment (pokus-predloha) ---------- */
+@utility font-pk {
+  font-family: var(--font-serif-light);
+  font-variant-numeric: lining-nums;
+}
+
+/* One look for every photo: real colour, gently unified (less saturation, a touch warm).
+   Black & white instead: filter: grayscale(1) contrast(1.08) brightness(0.96); */
+@utility photo {
+  filter: saturate(0.82) contrast(1.04) sepia(0.06);
+}
+
+/* Black & white (hero portrait) */
+@utility bw {
+  filter: grayscale(1) contrast(1.08) brightness(0.96);
+}
+
+/* Diagonal light bands on dark panels */
+@utility stripes {
+  background-image:
+    linear-gradient(135deg, transparent 0 38%, rgba(255, 255, 255, 0.045) 38% 52%, transparent 52% 100%),
+    linear-gradient(135deg, transparent 0 66%, rgba(255, 255, 255, 0.03) 66% 76%, transparent 76% 100%);
+}
+
+/* ---------- Motion: preset "Elegantný / prémiový" (ANIMATIONS.md, section E) ----------
+   One easing + one set of durations for the whole site; JS mirrors these in lib/motion.ts.
+   Hidden start states only apply when <html> has .js (set inline in layout) and motion is allowed. */
+:root {
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 200ms;
+  --dur-roll: 350ms;
+  --dur-line: 300ms;
+  --dur-base: 900ms;
+  --stagger: 80ms;
+}
+
+@keyframes motion-failsafe {
   to {
     opacity: 1;
-    transform: none;
+    clip-path: inset(0 0 0 0);
   }
 }
 
-.page-enter {
-  animation: page-enter 550ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+@media (prefers-reduced-motion: no-preference) {
+  /* A3 split text: hidden until lines are split + masked; failsafe shows it if JS never runs */
+  .js [data-split] {
+    opacity: 0;
+    animation: motion-failsafe 0s 3s forwards;
+  }
+
+  /* A6 curtain: frame starts fully clipped from the top */
+  .js [data-curtain] {
+    clip-path: inset(100% 0 0 0);
+    animation: motion-failsafe 0s 3s forwards;
+  }
+
+  .js.motion-ready [data-split],
+  .js.motion-ready [data-curtain] {
+    animation: none;
+  }
 }
 
-/* Elements are hidden only once JS marks them (see MotionRoot) — no-JS stays visible */
-[data-reveal].reveal-pending {
-  opacity: 0;
-  transform: translateY(28px);
+/* A3: room for descenders/diacritics inside line masks */
+.split-mask {
+  padding-block: 0.08em 0.14em;
+  margin-block: -0.08em -0.14em;
 }
 
-[data-reveal].reveal-in {
-  opacity: 1;
-  transform: none;
-  transition:
-    opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1),
-    transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-
+/* A7 parallax: image 25 % taller than its frame, moved ±10 % by JS */
 [data-parallax] {
-  will-change: transform;
+  top: -12.5% !important;
+  height: 125% !important;
+}
+
+/* D3 page transitions (React <ViewTransition> in template.tsx) */
+::view-transition-old(.page-out) {
+  animation: vt-out var(--dur-fast) var(--ease-out) both;
+}
+
+::view-transition-new(.page-in) {
+  animation: vt-in var(--dur-base) var(--ease-out) both;
+}
+
+@keyframes vt-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes vt-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+/* C2 text roll: copy rolls in from below (mouse only) */
+.roll {
+  display: inline-grid;
+  overflow: hidden;
+  padding-block: 0.2em;
+  margin-block: -0.2em;
+}
+
+.roll > span {
+  grid-area: 1 / 1;
+  transition: transform var(--dur-roll) var(--ease-out);
+}
+
+.roll > span + span {
+  transform: translateY(135%);
+}
+
+/* C3 animated underline: draws in from the left, leaves to the right (mouse only) */
+.u-line {
+  position: relative;
+}
+
+.u-line::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 1.5px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--dur-line) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  :is(a, button):hover .roll > span:first-child,
+  :is(a, button):focus-visible .roll > span:first-child {
+    transform: translateY(-135%);
+  }
+
+  :is(a, button):hover .roll > span + span,
+  :is(a, button):focus-visible .roll > span + span {
+    transform: none;
+  }
+
+  .u-line:hover::after,
+  :is(a, button):hover > .u-line::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .page-enter {
+  ::view-transition-old(.page-out),
+  ::view-transition-new(.page-in) {
     animation: none;
   }
 
-  [data-reveal].reveal-pending {
-    opacity: 1;
-    transform: none;
-  }
-
-  [data-parallax] {
-    transform: none !important;
+  .roll > span,
+  .u-line::after {
+    transition: none;
   }
 }
 
@@ -169,10 +293,6 @@
 .surface-ink:focus-visible {
   outline: 2px solid var(--color-gold);
   outline-offset: 2px;
-}
-
-html {
-  scroll-behavior: smooth;
 }
 
 body {
@@ -242,10 +362,6 @@ body {
   .premium-card-hover:hover {
     transform: none !important;
   }
-
-  .gold-hover:hover {
-    box-shadow: none;
-  }
 }
 
 /* Contact page: embedded Google Map — dark, site-consistent look */
@@ -266,27 +382,18 @@ body {
   filter: grayscale(0.85) invert(0.92) contrast(1.05) brightness(0.9);
 }
 
-/* Premium micro-interactions — hardware-friendly (transform / shadow) */
-.gold-hover {
-  transition:
-    transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 0.25s ease;
-  will-change: transform;
-}
-
-.gold-hover:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 28px -6px rgba(255, 215, 0, 0.38);
-}
-
+/* Premium micro-interactions — transform only, mouse only */
+.gold-hover,
 .premium-card-hover {
-  transition:
-    transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-    border-color 0.25s ease;
-  will-change: transform;
+  transition: transform var(--dur-fast) var(--ease-out);
 }
 
-.premium-card-hover:hover {
-  transform: scale(1.02);
-  border-color: rgba(255, 215, 0, 0.32);
+@media (hover: hover) and (pointer: fine) {
+  .gold-hover:hover {
+    transform: scale(1.03);
+  }
+
+  .premium-card-hover:hover {
+    transform: scale(1.02);
+  }
 }

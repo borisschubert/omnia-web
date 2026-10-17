@@ -149,7 +149,7 @@ export default function NewsArchivePage({ locale }: { locale: Locale }) {
         <Container>
           <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-2xl">
-              <h1 className="relative text-2xl font-semibold tracking-tight text-white md:text-3xl after:mt-2 after:block after:h-px after:w-12 after:content-[''] after:bg-accent">
+              <h1 data-split className="relative text-2xl font-semibold tracking-tight text-white md:text-3xl after:mt-2 after:block after:h-px after:w-12 after:content-[''] after:bg-accent">
                 {t(locale, "page.news.title")}
               </h1>
               <p className="mt-4 text-[0.9375rem] leading-relaxed text-white/85 md:text-base">

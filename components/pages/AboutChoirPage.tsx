@@ -133,8 +133,9 @@ export default function AboutChoirPage({ locale }: { locale: Locale }) {
     <main className="min-h-screen bg-[#050505]">
       <section className="relative min-h-[min(50vh,520px)] overflow-hidden md:min-h-[55vh] lg:min-h-[60vh]">
         <div className="pointer-events-none absolute inset-0" aria-hidden>
-          <div className="absolute inset-0 scale-[1.03]">
+          <div className="absolute inset-0 scale-[1.03] overflow-hidden">
             <Image
+              data-parallax
               src="/hero.jpg"
               alt=""
               fill
@@ -151,7 +152,7 @@ export default function AboutChoirPage({ locale }: { locale: Locale }) {
           <Container>
             <LoadTitleEnter>
               <div className="flex flex-col items-center">
-                <h1
+                <h1 data-split
                   className={`relative text-2xl font-semibold tracking-tight text-[#FFFFFF] md:text-3xl after:mt-2 after:block after:h-px after:w-12 after:content-[''] after:bg-accent ${aboutHeroShadow}`}
                 >
                   {t(locale, "page.aboutChoir.title")}
@@ -169,6 +170,7 @@ export default function AboutChoirPage({ locale }: { locale: Locale }) {
         <Container>
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 lg:items-center">
             <div
+              data-curtain
               className={`relative aspect-[4/3] w-full overflow-hidden rounded-xl border ${CARD_BORDER} bg-[#000000] md:aspect-[3/2]`}
             >
               <Image
@@ -198,7 +200,7 @@ export default function AboutChoirPage({ locale }: { locale: Locale }) {
 
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 lg:items-center">
             <div className="order-2 max-w-xl text-left lg:order-1">
-              <h2 className="relative text-xl font-semibold text-[#FFFFFF] after:mt-2 after:block after:h-px after:w-12 after:content-[''] after:bg-accent md:text-2xl">
+              <h2 data-split className="relative text-xl font-semibold text-[#FFFFFF] after:mt-2 after:block after:h-px after:w-12 after:content-[''] after:bg-accent md:text-2xl">
                 {t(locale, "page.aboutChoir.repertoireTitle")}
               </h2>
               <AboutBodyParagraph

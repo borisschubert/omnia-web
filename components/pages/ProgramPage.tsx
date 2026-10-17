@@ -154,7 +154,7 @@ export default function ProgramPage({ locale }: { locale: Locale }) {
         <Container className="relative z-[1]">
           <div className="mx-auto max-w-[1000px]">
             <LoadTitleEnter>
-              <h1
+              <h1 data-split
                 className={`relative text-2xl font-semibold tracking-tight text-white md:text-3xl lg:text-4xl ${heroTitleShadow} after:mt-3 after:block after:h-0.5 after:w-14 after:bg-[var(--primary-gold)] after:content-[''] after:shadow-[0_0_12px_rgba(255,215,0,0.22)]`}
               >
                 {t(locale, "page.program.title")}
@@ -179,7 +179,7 @@ export default function ProgramPage({ locale }: { locale: Locale }) {
             <div className="space-y-14 md:space-y-16">
               {groups.map((group) => (
                 <div key={group.key}>
-                  <h2 className="relative z-[1] mb-8 text-center text-xl font-semibold tracking-tight text-[var(--primary-gold)] md:mb-10 md:text-2xl after:mx-auto after:mt-2 after:block after:h-px after:w-14 after:bg-[var(--primary-gold)]/65 after:content-['']">
+                  <h2 data-split className="relative z-[1] mb-8 text-center text-xl font-semibold tracking-tight text-[var(--primary-gold)] md:mb-10 md:text-2xl after:mx-auto after:mt-2 after:block after:h-px after:w-14 after:bg-[var(--primary-gold)]/65 after:content-['']">
                     {group.monthLabel}
                   </h2>
 

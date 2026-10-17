@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import RollText from "./RollText";
 
 type Variant = "gold" | "dark" | "outline" | "outline-ink";
 type Size = "md" | "lg";
@@ -42,13 +43,13 @@ export default function Button({
   if (external) {
     return (
       <a href={href} target="_blank" rel="noopener noreferrer" className={cls}>
-        {children}
+        <RollText>{children}</RollText>
       </a>
     );
   }
   return (
     <Link href={href} className={cls}>
-      {children}
+      <RollText>{children}</RollText>
     </Link>
   );
 }

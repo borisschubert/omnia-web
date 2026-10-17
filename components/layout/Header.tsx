@@ -9,7 +9,7 @@ import { alternateLocalePath, getDonateHref, localePath } from "@/lib/i18n/confi
 import { getNavLinks } from "@/lib/i18n/nav";
 import { t } from "@/lib/i18n/strings";
 import { FACEBOOK_URL, INSTAGRAM_URL } from "@/lib/content/organization";
-import { buttonClass } from "@/components/ds/Button";
+import RollText from "@/components/ds/RollText";
 
 function isActivePath(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
@@ -20,7 +20,7 @@ function LanguagePill({ locale, pathname, large = false }: { locale: Locale; pat
     const on = target === locale;
     const cls = large
       ? `rounded-full border border-cream/25 px-[18px] py-3 ${on ? "bg-cream text-ink" : "text-muted-ink hover:text-cream"}`
-      : `rounded-full px-2.5 py-[7px] ${on ? "bg-cream text-ink" : "text-muted-ink hover:text-cream"}`;
+      : `rounded-full px-2.5 py-[7px] ${on ? "bg-coal text-snow" : "text-graphite hover:text-coal"}`;
     return (
       <Link
         href={on ? pathname : alternateLocalePath(pathname, target)}
@@ -42,7 +42,7 @@ function LanguagePill({ locale, pathname, large = false }: { locale: Locale; pat
     );
   }
   return (
-    <div className="flex rounded-full border border-cream/20 p-[3px] t-label leading-none">
+    <div className="flex rounded-full border border-hairline p-[3px] t-label leading-none">
       {option("sk", "SK")}
       {option("en", "EN")}
     </div>
@@ -71,29 +71,38 @@ export default function Header({ locale }: { locale: Locale }) {
   }, [open]);
 
   return (
-    <header className="surface-ink sticky top-0 z-[100] bg-ink text-cream">
+    <header className="surface-cream sticky top-0 z-[100] border-b border-hairline bg-snow/95 text-coal backdrop-blur">
       <div className="wrap flex h-[clamp(68px,6vw,84px)] items-center gap-6">
         <Link
           href={localePath("/", locale)}
           className="mr-auto flex items-center gap-4"
           aria-label={t(locale, "nav.home")}
         >
+          {/* Logo has white lettering: SVG filter turns white → black, keeps the yellow note */}
+          <svg aria-hidden className="absolute size-0">
+            <filter id="logo-on-light" colorInterpolationFilters="sRGB">
+              <feColorMatrix values="1.218 0 -1.218 0 0  0 1.306 -1.306 0 0  0.218 0 -0.218 0 0  0 0 0 1 0" />
+            </filter>
+          </svg>
           <Image
             src="/logo.png"
             alt="OMNIA"
             width={1227}
             height={617}
-            className="block h-[clamp(30px,2.8vw,38px)] w-auto"
+            className="block h-[clamp(30px,2.8vw,38px)] w-auto [filter:url(#logo-on-light)]"
             priority
           />
-          <span className="hidden border-l border-cream/20 pl-4 t-label text-muted-ink min-[1360px]:block">
+          <span className="hidden border-l border-hairline pl-4 font-pk text-[12px] font-bold uppercase leading-[1.25] tracking-[0.06em] text-coal min-[1360px]:block">
             {t(locale, "header.tagline1")}
             <br />
             {t(locale, "header.tagline2")}
           </span>
         </Link>
 
-        <nav className="hidden gap-0.5 t-small font-medium leading-none nav:flex" aria-label={t(locale, "nav.mainLabel")}>
+        <nav
+          className="hidden gap-1 font-pk text-[13px] font-semibold uppercase leading-none tracking-[0.07em] nav:flex"
+          aria-label={t(locale, "nav.mainLabel")}
+        >
           {links.map(({ href, key }) => {
             const on = isActivePath(pathname, href);
             return (
@@ -101,11 +110,11 @@ export default function Header({ locale }: { locale: Locale }) {
                 key={key}
                 href={href}
                 aria-current={on ? "page" : undefined}
-                className={`rounded-full px-3 py-2.5 transition-colors ${
-                  on ? "bg-gold/10 text-gold" : "text-cream hover:bg-cream/[0.08]"
+                className={`border-b-[1.5px] px-2.5 py-2.5 transition-colors duration-200 ${
+                  on ? "border-brass text-brass" : "border-transparent text-coal hover:text-brass"
                 }`}
               >
-                {t(locale, key)}
+                <RollText>{t(locale, key)}</RollText>
               </Link>
             );
           })}
@@ -115,8 +124,11 @@ export default function Header({ locale }: { locale: Locale }) {
           <LanguagePill locale={locale} pathname={pathname} />
         </div>
 
-        <Link href={donateHref} className={buttonClass("gold", "md")}>
-          {t(locale, "button.donate")}
+        <Link
+          href={donateHref}
+          className="inline-flex min-h-11 items-center rounded-full bg-coal px-5 font-pk text-[13px] font-bold uppercase tracking-[0.07em] text-snow transition-colors duration-200 hover:bg-brass"
+        >
+          <RollText>{t(locale, "button.donate")}</RollText>
         </Link>
 
         <button
@@ -125,7 +137,7 @@ export default function Header({ locale }: { locale: Locale }) {
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={t(locale, open ? "menu.close" : "menu.open")}
-          className="flex size-11 shrink-0 items-center justify-center rounded-full border border-cream/25 text-[22px] leading-none text-cream nav:hidden"
+          className="flex size-11 shrink-0 items-center justify-center rounded-full border border-hairline text-[22px] leading-none text-coal nav:hidden"
         >
           <span aria-hidden>{open ? "×" : "≡"}</span>
         </button>
@@ -144,8 +156,8 @@ export default function Header({ locale }: { locale: Locale }) {
                   key={key}
                   href={href}
                   aria-current={on ? "page" : undefined}
-                  className={`border-b border-cream/10 py-4 font-display text-[28px] font-bold leading-tight tracking-[-0.02em] ${
-                    on ? "text-gold" : "text-cream"
+                  className={`border-b border-cream/10 py-4 font-pk text-[28px] font-light leading-tight tracking-[-0.02em] ${
+                    on ? "text-brass-soft" : "text-cream"
                   }`}
                 >
                   {t(locale, key)}

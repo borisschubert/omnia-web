@@ -14,7 +14,7 @@ import {
 } from "@/lib/content/organization";
 import { buttonClass } from "@/components/ds/Button";
 
-const linkCls = "text-cream transition-colors hover:text-gold";
+const linkCls = "u-line self-start text-cream transition-colors duration-200 hover:text-gold";
 
 function ColumnTitle({ children }: { children: React.ReactNode }) {
   return <span className="mb-1.5 t-label text-gold">{children}</span>;

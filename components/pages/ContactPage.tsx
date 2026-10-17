@@ -142,7 +142,7 @@ export default function ContactPage({ locale }: { locale: Locale }) {
       <section className="border-b border-white/[0.06] pb-10 pt-10 md:pb-14 md:pt-12 lg:pb-16 lg:pt-14">
         <Container>
           <LoadTitleEnter>
-            <h1 className="relative text-2xl font-semibold tracking-tight text-white md:text-3xl after:mt-2 after:block after:h-px after:w-12 after:content-[''] after:bg-accent">
+            <h1 data-split className="relative text-2xl font-semibold tracking-tight text-white md:text-3xl after:mt-2 after:block after:h-px after:w-12 after:content-[''] after:bg-accent">
               {t(locale, "page.contact.title")}
             </h1>
           </LoadTitleEnter>
