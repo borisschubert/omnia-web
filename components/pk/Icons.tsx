@@ -37,7 +37,8 @@ export function SoundWave({ className = "" }: { className?: string }) {
           x2={x + 1.5}
           y1={y1}
           y2={y2}
-          stroke={i === 2 || i === 5 ? "var(--color-brass)" : "currentColor"}
+          stroke="currentColor"
+          className={i === 2 || i === 5 ? "text-brass" : undefined}
           strokeWidth="3"
           strokeLinecap="round"
         />

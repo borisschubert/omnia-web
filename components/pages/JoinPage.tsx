@@ -52,7 +52,7 @@ export default function JoinPage({ locale }: { locale: Locale }) {
           <ol className="m-0 grid list-none gap-x-[clamp(24px,3vw,48px)] gap-y-10 p-0 md:grid-cols-3">
             {reasons.map((r, i) => (
               <li key={r.titleKey} className="flex flex-col gap-3 border-t border-coal pt-6">
-                <span className="font-pk text-[13px] font-bold tracking-[0.14em] text-brass">0{i + 1}</span>
+                <span className="font-pk text-[13px] font-bold tracking-[0.14em] text-brass-ink">0{i + 1}</span>
                 <h3 className="m-0 font-pk text-[clamp(24px,2.2vw,30px)] font-normal leading-[1.2] tracking-[-0.015em]">
                   {t(locale, r.titleKey)}
                 </h3>

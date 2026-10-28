@@ -25,7 +25,7 @@ export default function PageHero({
       >
         <div className="flex max-w-[760px] flex-col">
           {kicker ? (
-            <p className="m-0 mb-[clamp(16px,1.8vw,24px)] font-pk text-[13px] font-bold uppercase tracking-[0.18em] text-brass">
+            <p className="m-0 mb-[clamp(16px,1.8vw,24px)] font-pk text-[13px] font-bold uppercase tracking-[0.18em] text-brass-ink">
               {kicker}
             </p>
           ) : null}

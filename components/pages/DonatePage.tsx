@@ -58,7 +58,7 @@ export default function DonatePage({ locale }: { locale: Locale }) {
             <ol className="m-0 list-none p-0">
               {supportItems.map((s, i) => (
                 <li key={s.titleKey} className="flex gap-6 border-b border-hairline py-[clamp(20px,2.4vw,30px)]">
-                  <span className="pt-1 font-pk text-[13px] font-bold tracking-[0.14em] text-brass">0{i + 1}</span>
+                  <span className="pt-1 font-pk text-[13px] font-bold tracking-[0.14em] text-brass-ink">0{i + 1}</span>
                   <span className="flex flex-col gap-1.5">
                     <span className="font-pk text-[clamp(20px,1.8vw,24px)] font-normal">{t(locale, s.titleKey).replace(/:$/, "")}</span>
                     <span className="font-pk text-[15px] leading-[1.8] text-graphite">{t(locale, s.bodyKey)}</span>

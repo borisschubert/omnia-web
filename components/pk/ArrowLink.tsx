@@ -20,7 +20,7 @@ export default function ArrowLink({
   children: ReactNode;
 }) {
   const cls = `group inline-flex items-center gap-3 font-pk text-[12px] font-bold uppercase tracking-[0.1em] ${
-    tone === "dark" ? "text-brass-soft" : "text-brass"
+    tone === "dark" ? "text-brass-soft" : "text-brass-ink"
   } ${className}`;
   const arrow = back ? (
     <LongArrow className="w-8 rotate-180 transition-transform duration-200 ease-[var(--ease-out)] group-hover:-translate-x-1" />

@@ -22,7 +22,7 @@ export default function HomeHero({ locale }: { locale: Locale }) {
     <section className="surface-cream overflow-hidden bg-snow text-coal">
       <div className="wrap grid lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-x-[clamp(32px,4vw,72px)]">
         <div className="flex flex-col justify-center pb-[clamp(48px,6vw,96px)] pt-[clamp(40px,6vw,104px)]">
-          <p className="m-0 mb-[clamp(18px,2vw,28px)] font-pk text-[13px] font-bold uppercase tracking-[0.18em] text-brass">
+          <p className="m-0 mb-[clamp(18px,2vw,28px)] font-pk text-[13px] font-bold uppercase tracking-[0.18em] text-brass-ink">
             {t(locale, "home.hero.eyebrow")}
           </p>
           <h1 data-split="manual" className="m-0 font-pk text-[clamp(50px,7vw,112px)] leading-[1.02] tracking-[-0.03em]">

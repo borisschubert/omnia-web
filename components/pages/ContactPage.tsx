@@ -25,7 +25,7 @@ const subjectOptions = [
 const labelCls = "mb-2 block font-pk text-[11px] font-bold uppercase tracking-[0.14em] text-graphite";
 const inputCls =
   "w-full border-0 border-b border-coal/25 bg-transparent px-0 py-3 font-pk text-[17px] text-coal outline-none transition-colors duration-200 placeholder:text-graphite/70 focus:border-coal";
-const errorCls = "mt-1.5 font-pk text-[13px] font-semibold text-brass";
+const errorCls = "mt-1.5 font-pk text-[13px] font-semibold text-brass-ink";
 
 function DetailRow({
   label,
@@ -55,7 +55,7 @@ function DetailRow({
       <button
         type="button"
         onClick={onCopy}
-        className="self-start font-pk text-[12px] font-bold uppercase tracking-[0.1em] text-brass"
+        className="self-start font-pk text-[12px] font-bold uppercase tracking-[0.1em] text-brass-ink"
         aria-live="polite"
       >
         <span className="u-line">{copied ? t(locale, "contact.copied") : t(locale, "contact.copy")}</span>

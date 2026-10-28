@@ -111,7 +111,7 @@ export default function Header({ locale }: { locale: Locale }) {
                 href={href}
                 aria-current={on ? "page" : undefined}
                 className={`border-b-[1.5px] px-2.5 py-2.5 transition-colors duration-200 ${
-                  on ? "border-brass text-brass" : "border-transparent text-coal hover:text-brass"
+                  on ? "border-brass text-brass-ink" : "border-transparent text-coal hover:text-brass-ink"
                 }`}
               >
                 <RollText>{t(locale, key)}</RollText>
@@ -126,7 +126,7 @@ export default function Header({ locale }: { locale: Locale }) {
 
         <Link
           href={donateHref}
-          className="inline-flex min-h-11 items-center rounded-full bg-coal px-5 font-pk text-[13px] font-bold uppercase tracking-[0.07em] text-snow transition-colors duration-200 hover:bg-brass"
+          className="inline-flex min-h-11 items-center rounded-full bg-coal px-5 font-pk text-[13px] font-bold uppercase tracking-[0.07em] text-snow transition-colors duration-200 hover:bg-brass-ink"
         >
           <RollText>{t(locale, "button.donate")}</RollText>
         </Link>

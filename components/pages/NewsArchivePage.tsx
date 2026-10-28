@@ -23,14 +23,14 @@ function href(item: NewsArticleMeta, locale: Locale) {
 function Meta({ item, locale }: { item: NewsArticleMeta; locale: Locale }) {
   return (
     <Kicker>
-      <span className="text-brass">{t(locale, item.categoryKey)}</span> · {t(locale, item.dateKey)}
+      <span className="text-brass-ink">{t(locale, item.categoryKey)}</span> · {t(locale, item.dateKey)}
     </Kicker>
   );
 }
 
 function ReadMore({ locale }: { locale: Locale }) {
   return (
-    <span className="inline-flex items-center gap-3 font-pk text-[12px] font-bold uppercase tracking-[0.1em] text-brass">
+    <span className="inline-flex items-center gap-3 font-pk text-[12px] font-bold uppercase tracking-[0.1em] text-brass-ink">
       <span className="u-line">{t(locale, "button.readMore")}</span>
       <LongArrow className="w-7 transition-transform duration-200 ease-[var(--ease-out)] group-hover:translate-x-1" />
     </span>

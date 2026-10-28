@@ -21,7 +21,7 @@ export default function CalendarButton({ item, locale }: { item: HomeConcertItem
     <button
       type="button"
       onClick={download}
-      className="font-pk text-[12px] font-bold uppercase tracking-[0.1em] text-coal transition-colors duration-200 hover:text-brass"
+      className="font-pk text-[12px] font-bold uppercase tracking-[0.1em] text-coal transition-colors duration-200 hover:text-brass-ink"
     >
       <span className="u-line">{t(locale, "concert.addToCalendar")}</span>
     </button>

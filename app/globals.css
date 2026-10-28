@@ -51,8 +51,10 @@
   --color-mist: #f4f3f1;
   --color-coal: #151515;
   --color-coal-2: #222222;
-  --color-brass: #b08a3e;
-  --color-brass-soft: #d8c59c;
+  /* Gold: warmer than the original brass, still calmer than the logo yellow (#fbc02d) */
+  --color-brass: #c99d26; /* large type, dates, lines, fills */
+  --color-brass-ink: #a8841a; /* small gold text on white — keeps it readable */
+  --color-brass-soft: #e3c97a; /* CTA circle, gold on dark backgrounds */
   --color-graphite: #6f6f6f;
   --color-hairline: rgba(21, 21, 21, 0.12);
 

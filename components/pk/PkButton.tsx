@@ -5,7 +5,7 @@ import RollText from "@/components/ds/RollText";
 type Variant = "dark" | "outline" | "light";
 
 const variants: Record<Variant, string> = {
-  dark: "bg-coal text-snow hover:bg-brass",
+  dark: "bg-coal text-snow hover:bg-brass-ink",
   outline: "border border-coal/25 text-coal hover:border-coal",
   light: "bg-snow text-coal hover:bg-brass-soft",
 };

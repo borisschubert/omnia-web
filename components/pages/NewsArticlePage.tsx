@@ -9,7 +9,7 @@ import Kicker from "@/components/pk/Kicker";
 import PkButton from "@/components/pk/PkButton";
 
 const bodyClass =
-  "m-0 font-pk text-[clamp(16px,1.2vw,18px)] leading-[1.9] text-coal/85 [&_a]:font-semibold [&_a]:text-brass [&_a]:underline [&_a]:decoration-1 [&_a]:underline-offset-4";
+  "m-0 font-pk text-[clamp(16px,1.2vw,18px)] leading-[1.9] text-coal/85 [&_a]:font-semibold [&_a]:text-brass-ink [&_a]:underline [&_a]:decoration-1 [&_a]:underline-offset-4";
 
 function Paragraph({ locale, textKey }: { locale: Locale; textKey: string }) {
   const content = t(locale, textKey);
@@ -32,7 +32,7 @@ export default function NewsArticlePage({ locale, slug }: { locale: Locale; slug
 
           <div className="mt-[clamp(32px,4vw,56px)] flex flex-col gap-4">
             <Kicker>
-              <span className="text-brass">{t(locale, article.categoryKey)}</span> · {t(locale, article.dateKey)}
+              <span className="text-brass-ink">{t(locale, article.categoryKey)}</span> · {t(locale, article.dateKey)}
             </Kicker>
             <h1
               data-split
