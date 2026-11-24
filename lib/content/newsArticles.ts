@@ -5,6 +5,7 @@ export const newsCardImageClass =
   "object-contain object-center bg-[#050505] opacity-80 contrast-95 brightness-90 grayscale-[20%] transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0 group-hover:brightness-100";
 
 export const newsArticleSlugs = [
+  "pax-imploramus-rzeszow-2026",
   "world-choir-games-2026-dve-zlate-medaily",
   "staromestske-slavnosti-zilina",
   "podporte-nas-olympijsky-sen-donio",
@@ -52,6 +53,21 @@ export const newsArticles: NewsArticleMeta[] = [
     ],
     gallery: ["/images/wcg-2026-medaily.jpg", "/images/wcg-2026-zbor-schody.jpg"],
     featured: true,
+  },
+  {
+    slug: "pax-imploramus-rzeszow-2026",
+    dateIso: "2026-11-24",
+    image: "/images/pax-imploramus-plagat.jpg",
+    categoryKey: "news.category.concert",
+    titleKey: "news.article.pax.title",
+    excerptKey: "news.article.pax.excerpt",
+    dateKey: "news.article.pax.date",
+    bodyKeys: [
+      "news.article.pax.body.p1",
+      "news.article.pax.body.p2",
+      "news.article.pax.body.p3",
+      "news.article.pax.body.p4",
+    ],
   },
   {
     slug: "staromestske-slavnosti-zilina",

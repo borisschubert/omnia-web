@@ -40,12 +40,16 @@ export const homeConcerts: HomeConcertItem[] = [
   },
   {
     dateKey: "concert.s2026.nov.project.date",
-    dateIso: "2026-11-26",
+    dateIso: "2026-11-28",
     dateDisplayKey: "concert.s2026.nov.project.dateDisplay",
     eventType: "international",
     titleKey: "concert.s2026.nov.project.title",
     placeKey: "concert.s2026.nov.project.place",
-    mapsUrl: "https://www.google.com/maps/search/Rzesz%C3%B3w+Poland",
+    venueKey: "concert.s2026.nov.project.venue",
+    timeKey: "concert.s2026.nov.project.time",
+    ticketKey: "concert.s2026.nov.project.ticket",
+    detailPath: "/aktuality/pax-imploramus-rzeszow-2026",
+    mapsUrl: "https://www.google.com/maps/search/Wydzia%C5%82+Muzyki+Uniwersytetu+Rzeszowskiego",
   },
   {
     dateKey: "concert.s2026.dec.gaudium.date",
