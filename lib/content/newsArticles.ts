@@ -68,6 +68,7 @@ export const newsArticles: NewsArticleMeta[] = [
       "news.article.pax.body.p3",
       "news.article.pax.body.p4",
     ],
+    gallery: ["/images/pax-imploramus-plagat.jpg"],
   },
   {
     slug: "staromestske-slavnosti-zilina",
